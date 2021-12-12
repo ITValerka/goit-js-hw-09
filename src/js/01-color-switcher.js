@@ -1,32 +1,35 @@
 const btnStartChangeColor = document.querySelector('button[data-start]');
 const btnStopChangeColor = document.querySelector('button[data-stop]');
-
+const button = document.querySelector('button');
 btnStartChangeColor.addEventListener('click', changeBackgroundColor);
 btnStopChangeColor.addEventListener('click', stopChangeColor);
-
 function getRandomHexColor() {
   return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 }
-
-const intervalId = setInterval(getRandomHexColor, 1000);
-
-function changeBackgroundColor() {
+function bgColorChange() {
   document.body.style.backgroundColor = getRandomHexColor();
-  btnStartChangeColor.classList.add('active');
-  btnStopChangeColor.classList.remove('active');
-  if (btnStartChangeColor.classList.contains('active')) {
+}
+function changeBackgroundColor() {
+  if (changeBackgroundColor) {
     btnStartChangeColor.disabled = 'true';
     btnStopChangeColor.disabled = '';
   }
+  intervalId = setInterval(bgColorChange, 1000);
 }
 function stopChangeColor() {
-  clearInterval(intervalId);
-  btnStartChangeColor.classList.remove('active');
-  btnStopChangeColor.classList.add('active');
-  if (btnStopChangeColor.classList.contains('active')) {
+  if (stopChangeColor) {
     btnStopChangeColor.disabled = 'true';
     btnStartChangeColor.disabled = '';
   }
+  clearInterval(intervalId);
 }
-// button.style.backgroundColor = 'teal';
-// button.style.fontSize = '24px';
+btnStartChangeColor.style.position = 'absolute';
+btnStartChangeColor.style.top = '55%';
+btnStartChangeColor.style.left = '39%';
+btnStartChangeColor.style.width = '150px';
+btnStartChangeColor.style.height = '75px';
+btnStopChangeColor.style.position = 'absolute';
+btnStopChangeColor.style.top = '55%';
+btnStopChangeColor.style.left = '51%';
+btnStopChangeColor.style.width = '150px';
+btnStopChangeColor.style.height = '75px';
